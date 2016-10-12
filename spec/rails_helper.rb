@@ -6,6 +6,29 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rails'
+
+Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+OmniAuth.config.test_mode = true
+
+def stub_omniauth
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    "provider"=>"github",
+    "uid"=>"14339707",
+    "info"=>{
+      "nickname"=>"calaway",
+      "email"=>nil,
+      "name"=>"Calaway",
+      "image"=>"https://avatars.githubusercontent.com/u/14339707?v=3",
+      "urls"=>{
+        "GitHub"=>"https://github.com/calaway", "Blog"=>nil
+      }
+    },
+    "credentials"=>{
+      "token"=>ENV['STUB_OMNIAUTH_TOKEN'], "expires"=>false
+    }
+  })
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
