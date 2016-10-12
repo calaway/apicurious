@@ -8,6 +8,11 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
 
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock # or :fakeweb
+end
+
 Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
 OmniAuth.config.test_mode = true
 
