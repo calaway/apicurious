@@ -1,3 +1,25 @@
+<p><%= image_tag @user_info["avatar_url"] %></p>
+
+<h1>Name: <%= @user_info["name"] %></h1>
+
+<h4>Nickname: <%= @user_info["login"] %></h4>
+
+<p>Bio: <%= @user_info["bio"] %></p>
+
+<p>Number of Starred Repos: <%= @starred_repo_count %></p>
+
 <p>
-  <%= @user_info["bio"] %>
+  Followers:
+  <% @followers.each_with_index do |follower, index| %>
+    <%= ", " if index != 0 %>
+    <%= link_to follower["login"], follower["html_url"] %>
+  <% end %>
+</p>
+
+<p>
+  Following:
+  <% @followees.each_with_index do |followee, index| %>
+    <%= ", " if index != 0 %>
+    <%= link_to followee["login"], followee["html_url"] %>
+  <% end %>
 </p>

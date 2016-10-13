@@ -25,8 +25,6 @@ describe "User logs in with github" do
 
       expect(current_path).to eq(user_path(User.last.id))
       expect(page).to have_content("Studying full stack web development at Turing School of Software & Design. (Turing.io)")
-
-      # expect(page).to have_css("a[href=\"#{artist_path(marley)}\"]")
     end
   end
 end
