@@ -25,4 +25,14 @@ class GithubService
     response = conn(user.oauth_token).get "/users/#{user.user_name}/following"
     JSON.parse(response.body)
   end
+
+  def self.get_repos(user)
+    response = conn(user.oauth_token).get "/user/repos"
+    JSON.parse(response.body)
+  end
+
+  def self.get_events(user)
+    response = conn(user.oauth_token).get "/users/#{user.user_name}/events"
+    JSON.parse(response.body)
+  end
 end
